@@ -102,8 +102,24 @@ object IslandCommand {
                     // Delete island
                     executes(::deleteIsland)
                 }
+
+                literal("seed") {
+                    executes(::islandSeed)
+                }
             }
         }
+    }
+
+    private fun islandSeed(context: CommandContext<ServerCommandSource>): Int {
+        if (!IslandHandler.hasIsland(context.source.player)) {
+            context.reply(NO_ISLAND)
+            return -1
+        }
+
+        val seed = GunpowderMod.instance.server.getWorld(IslandHandler.getIsland(context.source.player).dim)!!.seed
+        context.reply(TranslatedText("gunpowder.island.seed", seed))
+
+        return 0
     }
 
     private inline fun CommandContext<ServerCommandSource>.reply(text: TranslatedText) {
