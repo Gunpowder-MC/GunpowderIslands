@@ -1,0 +1,13 @@
+# Gunpowder Islands Config
+
+# Maximum island size
+# Do not put this over 29999984!
+maxIslandSize: 29999984
+
+# Maximum size of a team (0 to disable)
+maxTeamSize: 10
+
+# Enable protosky mode
+# This means the world will generate first, and then later delete everything
+# This way structure bounding boxes will still exist.
+protoskyMode: false

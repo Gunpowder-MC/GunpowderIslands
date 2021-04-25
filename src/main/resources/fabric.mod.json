@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "gunpowder-islands",
+  "version": "${version}",
+  "name": "Gunpowder Islands",
+  "description": "Gunpowder Islands Module",
+  "license": "MIT",
+  "icon": "assets/gunpowder/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "gunpowder:modules": [
+      {
+        "adapter": "kotlin",
+        "value": "io.github.gunpowder.GunpowderIslandsModule"
+      }
+    ]
+  },
+  "accessWidener": "gunpowder-islands.accesswidener",
+  "mixins": [
+    "mixins.islands.gunpowder.json"
+  ],
+  "depends": {
+    "gunpowder-base": ">=${gunpowder}",
+    "fabricloader": ">=0.8.9",
+    "fabric": "*"
+  }
+}

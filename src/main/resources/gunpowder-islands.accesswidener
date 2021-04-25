@@ -1,0 +1,7 @@
+accessWidener v1 named
+extendable class net/minecraft/world/gen/chunk/NoiseChunkGenerator
+accessible method net/minecraft/world/dimension/DimensionType <init> (Ljava/util/OptionalLong;ZZZZDZZZZZILnet/minecraft/world/biome/source/BiomeAccessType;Lnet/minecraft/util/Identifier;Lnet/minecraft/util/Identifier;F)V
+accessible method net/minecraft/world/dimension/DimensionType <init> (Ljava/util/OptionalLong;ZZZZDZZZZILnet/minecraft/util/Identifier;Lnet/minecraft/util/Identifier;F)V
+accessible method net/minecraft/world/gen/chunk/ChunkGeneratorSettings createUndergroundSettings (Lnet/minecraft/world/gen/chunk/StructuresConfig;Lnet/minecraft/block/BlockState;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/Identifier;)Lnet/minecraft/world/gen/chunk/ChunkGeneratorSettings;
+accessible method net/minecraft/world/gen/chunk/ChunkGeneratorSettings createSurfaceSettings (Lnet/minecraft/world/gen/chunk/StructuresConfig;ZLnet/minecraft/util/Identifier;)Lnet/minecraft/world/gen/chunk/ChunkGeneratorSettings;
+accessible field net/minecraft/world/chunk/ProtoChunk lightSources Ljava/util/List;
