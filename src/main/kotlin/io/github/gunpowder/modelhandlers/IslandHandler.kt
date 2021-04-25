@@ -24,7 +24,6 @@
 
 package io.github.gunpowder.modelhandlers
 
-import com.google.common.collect.ImmutableList
 import com.mojang.authlib.GameProfile
 import com.mojang.serialization.Lifecycle
 import io.github.gunpowder.api.GunpowderMod
@@ -34,17 +33,20 @@ import io.github.gunpowder.entities.ProtoGenerator
 import io.github.gunpowder.entities.VoidGenerator
 import io.github.gunpowder.models.IslandTable
 import io.github.gunpowder.models.TeamsTable
-import net.minecraft.nbt.NbtOps
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.structure.StructurePlacementData
+import net.minecraft.structure.processor.BlockRotStructureProcessor
 import net.minecraft.tag.BlockTags
+import net.minecraft.util.BlockMirror
+import net.minecraft.util.BlockRotation
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.ChunkPos
+import net.minecraft.util.math.MathHelper
 import net.minecraft.util.registry.Registry
 import net.minecraft.util.registry.RegistryKey
 import net.minecraft.world.ChunkRegion
 import net.minecraft.world.GameMode
-import net.minecraft.world.World
 import net.minecraft.world.biome.source.VoronoiBiomeAccessType
 import net.minecraft.world.dimension.DimensionType
 import net.minecraft.world.gen.GeneratorOptions
@@ -202,9 +204,11 @@ object IslandHandler {
         val s = man.getStructure(Identifier("gunpowder-islands:spawn_platform"))!!
         val blockPos = BlockPos(0, 64, 0)
         s.place(
-            ChunkRegion(ow, ImmutableList.of(ow.getChunk(BlockPos.ORIGIN))),
+            ow,
             blockPos,
-            StructurePlacementData().setUpdateNeighbors(true),
+            StructurePlacementData().setMirror(BlockMirror.NONE).setRotation(BlockRotation.NONE)
+                .setIgnoreEntities(true).setChunkPosition(null)
+                .clearProcessors().addProcessor(BlockRotStructureProcessor(1f)).setRandom(Random()),
             Random()
         )
         val homePos = blockPos.add(s.size.x.toDouble() / 2, s.size.y.toDouble() + 1, s.size.z.toDouble() / 2)
