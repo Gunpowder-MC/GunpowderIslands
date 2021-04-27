@@ -110,23 +110,23 @@ object IslandCommand {
         }
     }
 
+    private inline fun CommandContext<ServerCommandSource>.reply(text: TranslatedText) {
+        source.sendFeedback(text.translateTextForPlayer(source.player), false)
+    }
+
+    private val invited = mutableMapOf<UUID, MutableList<UUID>>()
+
     private fun islandSeed(context: CommandContext<ServerCommandSource>): Int {
         if (!IslandHandler.hasIsland(context.source.player)) {
             context.reply(NO_ISLAND)
             return -1
         }
 
-        val seed = GunpowderMod.instance.server.getWorld(IslandHandler.getIsland(context.source.player).dim)!!.seed
+        val seed = IslandHandler.getIslandSeed(context.source.player)
         context.reply(TranslatedText("gunpowder.island.seed", seed))
 
         return 0
     }
-
-    private inline fun CommandContext<ServerCommandSource>.reply(text: TranslatedText) {
-        source.sendFeedback(text.translateTextForPlayer(source.player), false)
-    }
-
-    private val invited = mutableMapOf<UUID, MutableList<UUID>>()
 
     private fun setHomeIsland(context: CommandContext<ServerCommandSource>): Int {
         if (!IslandHandler.hasOwnIsland(context.source.player)) {
@@ -135,7 +135,7 @@ object IslandCommand {
         }
 
         val world = GunpowderMod.instance.server.getWorld(IslandHandler.getIsland(context.source.player).dim)
-        world?.setSpawnPos(context.source.player.blockPos, 0f)
+        world?.setSpawnPos(context.source.player.blockPos.add(0.5, 0.5, 0.5), 0f)
         context.reply(HOME_SET)
 
         return 1

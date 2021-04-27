@@ -340,4 +340,21 @@ object IslandHandler {
             TeamsTable.select { TeamsTable.owner.eq(id) }.count()
         }.get() >= config.maxTeamSize
     }
+
+    fun getIslandSeed(player: ServerPlayerEntity): Long {
+        return db.transaction {
+            val item = IslandTable.select { IslandTable.owner.eq(player.uuid) }.firstOrNull()
+            return@transaction if (item != null) {
+                item[IslandTable.seed]
+            } else {
+                val team = TeamsTable.select { TeamsTable.allowed.eq(player.uuid) }.firstOrNull()
+                if (team != null) {
+                    val itemOther = IslandTable.select { IslandTable.owner.eq(team[TeamsTable.owner]) }.first()
+                    itemOther[IslandTable.seed]
+                } else {
+                    error("SHOULDN'T HAPPEN")
+                }
+            }
+        }.get()
+    }
 }

@@ -15,6 +15,6 @@
   "gunpowder.island.leave_island": "You left the island.",
   "gunpowder.island.accept_invite": "The invite to join the island has been accepted.",
   "gunpowder.island.island_full": "This island is already full!",
-  "gunpowder.island.home_set": "You are not currently part of an island!",
+  "gunpowder.island.home_set": "Home set! /is home will now go here!",
   "gunpowder.island.seed": "Seed of your island: %d"
 }

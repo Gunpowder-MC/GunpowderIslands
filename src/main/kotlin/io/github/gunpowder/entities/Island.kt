@@ -39,7 +39,7 @@ data class Island(
         val world = GunpowderMod.instance.server.getWorld(dim) ?: error("World not available!")
         TeleportRequest.builder {
             dimension(world)
-            destination(world.spawnPos)
+            destination(world.spawnPos.add(0.5, 0.5, 0.5))
             player(player)
         }.execute(1)
     }
